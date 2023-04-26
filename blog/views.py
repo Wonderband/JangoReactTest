@@ -62,7 +62,7 @@ def posts(request):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-@api_view(['GET'])
+@api_view(['GET', 'PUT', 'DELETE'])
 def post_detail(request, pk):
 
     try:
@@ -74,7 +74,14 @@ def post_detail(request, pk):
         serializer = PostSerializer(post, context={'request': request})
         return Response(serializer.data)
 
-    # elif request.method == 'DELETE':
-    #
-    #     return Response()
+    elif request.method == 'PUT':
+        serializer = PostSerializer(post, data=request.data, context={'request': request})
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    elif request.method == 'DELETE':
+        post.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
 

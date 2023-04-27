@@ -4,6 +4,5 @@ export const getAllPosts = async (page) => {
     baseURL: " http://127.0.0.1:8000/posts/",
   });
   const response = await axInstance.get("", { params: { page: page } });
-  console.log(response);
   return response.data;
 };

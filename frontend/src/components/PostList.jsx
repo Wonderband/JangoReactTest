@@ -8,10 +8,7 @@ export const PostList = () => {
     getAllPosts(page).then((posts) => setPosts(posts.data));
   }, [page]);
 
-  const togglePage = () => {
-    setPage(page === 1 ? 2 : 1);
-    console.log(page);
-  };
+  const togglePage = () => setPage(page === 1 ? 2 : 1);
 
   return (
     <>

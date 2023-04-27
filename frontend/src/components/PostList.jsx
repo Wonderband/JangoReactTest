@@ -4,16 +4,23 @@ import { getAllPosts } from "../service";
 export const PostList = () => {
   const [posts, setPosts] = useState([]);
   const [page, setPage] = useState(1);
+  const [error, setError] = useState(false);
   useEffect(() => {
-    getAllPosts(page).then((posts) => setPosts(posts.data));
+    getAllPosts(page)
+      .then((posts) => setPosts(posts.data.data))
+      .catch((err) => {
+        setError(true);
+        console.log(err);
+      });
   }, [page]);
 
   const togglePage = () => setPage(page === 1 ? 2 : 1);
 
   return (
     <>
+      {error && <p>Some error!</p>}
       <ul>
-        {posts.length > 0 &&
+        {posts?.length > 0 &&
           posts.map((post) => (
             <li key={post.pk}>
               <h4>{post.title}</h4>
@@ -22,7 +29,7 @@ export const PostList = () => {
             </li>
           ))}
       </ul>
-      <button onClick={togglePage}>Page {page}</button>
+      {!error && <button onClick={togglePage}>Page {page}</button>}
     </>
   );
 };

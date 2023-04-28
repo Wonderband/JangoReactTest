@@ -1,3 +1,3 @@
-export const AboutUsTab = () => {
-  return <div>All ABOUT US here!</div>;
+export const AboutUsTab = ({ t }) => {
+  return <div>{t("about.title")}</div>;
 };

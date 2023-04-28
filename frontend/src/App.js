@@ -1,43 +1,34 @@
-import "./App.css";
-import { PostList } from "./components/PostList";
+import { Routes, Route } from "react-router-dom";
+
+// import "./App.css";
+import { AboutUsTab } from "./components/AboutUsTab";
+import { Articles } from "./components/Articles";
+import { RulesTab } from "./components/RulesTab";
+import { Home } from "./pages/Home";
+import { Page404 } from "./pages/Page404";
+// import { PostList } from "./components/PostList";
 export const App = () =>
   //<PostList />;
-  {
-    const isLoading = useSelector(selectIsLoading);
-    const isAuth = useSelector(selectAuthToken);
-    const dispatch = useDispatch();
 
-    useEffect(() => {
-      dispatch(refreshUser());
-    }, [dispatch]);
+  {
+    // const isAdmin = false;
+    // const isLoading = useSelector(selectIsLoading);
+    // const isAuth = useSelector(selectAuthToken);
+    // const dispatch = useDispatch();
+
+    // useEffect(() => {
+    //   dispatch(refreshUser());
+    // }, [dispatch]);
 
     return (
-      <>
-        {isLoading && <Loader />}
-        <Routes>
-          <Route
-            path="/"
-            element={
-              isAuth ? <DashboardPage /> : <Navigate replace to="/login" />
-            }
-          >
-            <Route index element={<Navigate replace to="/home" />} />
-            <Route path="home" element={<HomeTab />} />
-            <Route path="diagram" element={<DiagramTab />} />
-            <Route path="currency" element={<CurrencyMobile />} />
-          </Route>
-          <Route
-            path="/login"
-            element={isAuth ? <Navigate to="/home" /> : <LoginPage />}
-          />
-          <Route
-            path="/register"
-            element={isAuth ? <Navigate to="/home" /> : <RegistrationPage />}
-          />
-          <Route path="*" element={<Page404 />} />
-        </Routes>
-        <Toast />
-      </>
+      <Routes>
+        <Route path="/" element={<Home />}>
+          <Route index element={<RulesTab />} />
+          <Route path="articles" element={<Articles />} />
+          <Route path="about" element={<AboutUsTab />} />
+        </Route>
+        <Route path="*" element={<Page404 />} />
+      </Routes>
     );
   };
 export default App;

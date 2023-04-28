@@ -1,3 +1,3 @@
-export const Page404 = () => {
-  return <h1>Im page 404 !</h1>;
+export const Page404 = ({ t }) => {
+  return <h1>{t("page404.title")}</h1>;
 };

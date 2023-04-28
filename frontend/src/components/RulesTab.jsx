@@ -1,3 +1,3 @@
-export const RulesTab = () => {
-  return <div>All RULES here!</div>;
+export const RulesTab = ({ t }) => {
+  return <div> {t("rules.title")}</div>;
 };

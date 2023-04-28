@@ -1,10 +1,10 @@
 import { PostList } from "./PostList";
 
-export const Articles = () => {
+export const Articles = ({ t }) => {
   return (
     <>
-      <div>All ARTICLES here!</div>
-      <PostList />
+      <div>{t("articles.title")}</div>
+      <PostList t={t} />
     </>
   );
 };

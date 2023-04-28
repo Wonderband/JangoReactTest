@@ -7,10 +7,10 @@ export const PostList = () => {
   const [error, setError] = useState(false);
   useEffect(() => {
     getAllPosts(page)
-      .then((posts) => setPosts(posts.data.data))
-      .catch((err) => {
+      .then(({ data }) => setPosts(data.data))
+      .catch(({ message }) => {
         setError(true);
-        console.log(err);
+        console.log(message);
       });
   }, [page]);
 
@@ -19,17 +19,20 @@ export const PostList = () => {
   return (
     <>
       {error && <p>Some error!</p>}
-      <ul>
-        {posts?.length > 0 &&
-          posts.map((post) => (
-            <li key={post.pk}>
-              <h4>{post.title}</h4>
-              <h5>{post.author}</h5>
-              <p>{post.content}</p>
-            </li>
-          ))}
-      </ul>
-      {!error && <button onClick={togglePage}>Page {page}</button>}
+      {posts.length > 0 && (
+        <>
+          <button onClick={togglePage}>Page {page}</button>
+          <ul>
+            {posts.map((post) => (
+              <li key={post.pk}>
+                <h4>{post.title}</h4>
+                <h5>{post.author}</h5>
+                <p>{post.content}</p>
+              </li>
+            ))}
+          </ul>
+        </>
+      )}
     </>
   );
 };

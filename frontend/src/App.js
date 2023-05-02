@@ -5,6 +5,7 @@ import { RulesTab } from "./components/RulesTab";
 import { Home } from "./pages/Home";
 import { Page404 } from "./pages/Page404";
 import { useTranslation } from "react-i18next";
+import { ArtDetails } from "./components/ArtDetails";
 
 export const App = () => {
   const { t } = useTranslation();
@@ -14,6 +15,7 @@ export const App = () => {
         <Route index element={<RulesTab t={t} />} />
         <Route path="articles" element={<Articles t={t} />} />
         <Route path="about" element={<AboutUsTab t={t} />} />
+        <Route path="/articles/:articleId" element={<ArtDetails />} />
       </Route>
       <Route path="*" element={<Page404 t={t} />} />
     </Routes>

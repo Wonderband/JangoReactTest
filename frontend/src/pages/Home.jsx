@@ -1,7 +1,7 @@
 import { Link, Outlet } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
-import { setLanguage } from "../redux/langSlice";
+import { setLanguage } from "../redux/globalSlice";
 
 const lngs = {
   en: { nativeName: "English" },

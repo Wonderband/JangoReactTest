@@ -40,6 +40,9 @@ i18n
           page404: {
             title: "PAGE NOT FOUND!",
           },
+          article: {
+            back: "Back to search",
+          },
         },
       },
       ua: {
@@ -63,6 +66,9 @@ i18n
           },
           page404: {
             title: "ТАКОЇ СТОРІНКИ НЕМАЄ!",
+          },
+          article: {
+            back: "Назад до пошуку",
           },
         },
       },

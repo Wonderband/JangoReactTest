@@ -1,3 +1,3 @@
-export const selectArticles = (state) => state.content.articles;
-export const selectPage = (state) => state.content.page;
-export const selectLanguage = (state) => state.lang.lang;
+export const selectArticles = (state) => state.content;
+// export const selectPage = (state) => state.content.page;
+export const selectGlobal = (state) => state.global;

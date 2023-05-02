@@ -1,10 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
+
 import { getArticles } from "./operations";
 
 const initialState = {
   articles: [],
   page: 1,
-  // lang: "ua",
+  // error: null,
 };
 
 const articlesSlice = createSlice({
@@ -14,9 +15,9 @@ const articlesSlice = createSlice({
     builder
       .addCase(getArticles.fulfilled, (state, { payload }) => {
         state.articles = payload;
-        // console.log(state);
       })
-      .addCase(getArticles.rejected, (_, { payload }) => {});
+      .addCase(getArticles.rejected, (_, { payload }) => console.log(payload));
+    // );
   },
   reducers: {
     togglePage(state, { payload }) {

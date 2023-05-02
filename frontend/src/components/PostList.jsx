@@ -2,13 +2,13 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { togglePage } from "../redux/articlesSlice";
 import { getArticles } from "../redux/operations";
-import { selectArticles, selectPage } from "../redux/selectors";
+import { selectArticles, selectGlobal } from "../redux/selectors";
 import { Article } from "./Article";
 
 export const PostList = ({ t }) => {
   const dispatch = useDispatch();
-  const articles = useSelector(selectArticles);
-  const page = useSelector(selectPage);
+  const { articles, page } = useSelector(selectArticles);
+  const { lang, error } = useSelector(selectGlobal);
 
   useEffect(() => {
     dispatch(getArticles(page));
@@ -18,12 +18,14 @@ export const PostList = ({ t }) => {
 
   return (
     <>
-      {articles.length === 0 && <p>Some error!</p>}
+      <p>{error}</p>
       {articles.length > 0 && (
         <>
           <button onClick={clickHandler}>
             {t("pages.page")} {page}
           </button>
+          <br />
+          {lang}
           <ul>
             {articles.map((post) => (
               <li key={post.pk}>

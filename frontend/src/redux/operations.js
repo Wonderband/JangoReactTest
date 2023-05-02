@@ -1,5 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { setGlobalError } from "./globalSlice";
 
 const axIstance = axios.create({
   baseURL: "http://127.0.0.1:8000/",
@@ -10,11 +11,12 @@ async function getAllArticles(page, thunkAPI) {
     const res = await axIstance.get("posts", {
       params: { page: page },
     });
-    if (res.data.error) {
-      return thunkAPI.rejectWithValue(res.data.error);
-    }
+    // if (res.data.error) {
+    //   return thunkAPI.rejectWithValue(res.data.error);
+    // }
     return res.data.data;
   } catch (error) {
+    thunkAPI.dispatch(setGlobalError(error.message));
     return thunkAPI.rejectWithValue(error.message);
   }
 }
@@ -31,7 +33,7 @@ export async function getArticleById(artId) {
 export async function getMainInfo() {
   try {
     const res = await axIstance.get("");
-    console.log(res);
+
     return res.statusText;
   } catch (error) {
     throw new Error(error.message);

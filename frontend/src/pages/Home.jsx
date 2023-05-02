@@ -1,16 +1,19 @@
 import { Link, Outlet } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { useDispatch } from "react-redux";
+import { setLanguage } from "../redux/langSlice";
 
 const lngs = {
   en: { nativeName: "English" },
   ua: { nativeName: "Українська" },
 };
 
-export const Home = ({ t }) => {
+export const Home = () => {
   const linkStyle = {
     paddingRight: "12px",
   };
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const dispatch = useDispatch();
   return (
     <>
       <header>
@@ -32,7 +35,10 @@ export const Home = ({ t }) => {
                 fontWeight: i18n.resolvedLanguage === lng ? "bold" : "normal",
               }}
               type="submit"
-              onClick={() => i18n.changeLanguage(lng)}
+              onClick={() => {
+                i18n.changeLanguage(lng);
+                dispatch(setLanguage(lng));
+              }}
             >
               {lngs[lng].nativeName}
             </button>

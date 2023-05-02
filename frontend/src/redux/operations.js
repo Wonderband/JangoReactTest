@@ -2,12 +2,12 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 const axIstance = axios.create({
-  baseURL: "http://127.0.0.1:8000/posts/",
+  baseURL: "http://127.0.0.1:8000/",
 });
 
 async function getAllArticles(page, thunkAPI) {
   try {
-    const res = await axIstance.get("", {
+    const res = await axIstance.get("posts", {
       params: { page: page },
     });
     if (res.data.error) {
@@ -21,10 +21,29 @@ async function getAllArticles(page, thunkAPI) {
 
 export async function getArticleById(artId) {
   try {
-    const res = await axIstance.get(`${artId}`);
+    const res = await axIstance.get(`posts/${artId}`);
     return res.data;
   } catch (error) {
-    return error.message;
+    throw new Error(error.message);
+  }
+}
+
+export async function getMainInfo() {
+  try {
+    const res = await axIstance.get("");
+    console.log(res);
+    return res.statusText;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+}
+
+export async function getAboutInfo() {
+  try {
+    const res = await axIstance.get("about");
+    return res.statusText;
+  } catch (error) {
+    throw new Error(error.message);
   }
 }
 

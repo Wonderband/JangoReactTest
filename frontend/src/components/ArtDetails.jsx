@@ -8,9 +8,9 @@ export const ArtDetails = () => {
   const location = useLocation();
 
   useEffect(() => {
-    getArticleById(articleId).then((res) => {
-      setArtContent(res);
-    });
+    getArticleById(articleId)
+      .then((res) => setArtContent(res))
+      .catch((err) => console.log(err));
   }, [articleId]);
   return (
     <div>

@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   lang: "ua",
   error: null,
+  pending: false,
 };
 
 const globalSlice = createSlice({
@@ -11,14 +12,18 @@ const globalSlice = createSlice({
   reducers: {
     setLanguage(state, { payload }) {
       state.lang = payload;
-      console.log(state.lang);
+      // console.log(payload);
     },
-    setGlobalError(state, { payload }) {
+    setError(state, { payload }) {
       state.error = payload;
-      console.log(state.error);
+      // console.log(payload);
+    },
+    setPending(state, { payload }) {
+      state.pending = payload;
+      // console.log(payload);
     },
   },
 });
 
-export const { setLanguage, setGlobalError } = globalSlice.actions;
+export const { setLanguage, setError, setPending } = globalSlice.actions;
 export const globalReducer = globalSlice.reducer;

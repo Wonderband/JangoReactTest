@@ -1,21 +1,19 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { getMainInfo } from "../redux/operations";
 import { selectGlobal } from "../redux/selectors";
-import { setError, setPending } from "../redux/globalSlice";
+import { loadFromDB } from "../loadFromDB";
 export const RulesTab = () => {
   const [mainInfo, setMainInfo] = useState("");
   const { error, lang, pending } = useSelector(selectGlobal);
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  useEffect(() => {
-    setPending(true);
-    getMainInfo()
-      .then((res) => setMainInfo(res.statusText))
-      .catch((err) => dispatch(setError(err.message)))
-      .finally(() => dispatch(setPending(false)));
-  });
+  const loader = useMemo(
+    () => loadFromDB(getMainInfo, setMainInfo, ["statusText"], dispatch),
+    [dispatch]
+  );
+  useEffect(() => loader(), [loader]);
   return (
     <div>
       {t("rules.title")}

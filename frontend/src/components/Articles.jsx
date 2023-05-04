@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
-import { setError, setPending } from "../redux/globalSlice";
 import { getAllArticles } from "../redux/operations";
 import { selectGlobal } from "../redux/selectors";
+import { loadFromDB } from "../loadFromDB";
 import { Article } from "./Article";
 
 export const Articles = () => {
@@ -12,17 +12,24 @@ export const Articles = () => {
   const [articles, setArticles] = useState([]);
   const [page, setPage] = useState(1);
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(setPending(true));
-    getAllArticles(page)
-      .then((res) => setArticles(res.data.data))
-      .catch((err) => dispatch(setError(err.message)))
-      .finally(() => dispatch(setPending(false)));
+  const loader = useMemo(() => {
+    return loadFromDB(
+      getAllArticles,
+      setArticles,
+      ["data", "data"],
+      dispatch,
+      page
+    );
   }, [dispatch, page]);
 
+  useEffect(() => {
+    return loader();
+  }, [loader, page]);
+
   const clickHandler = () => {
-    page === 1 ? setPage(2) : setPage(1);
+    setPage((prevPage) => {
+      return prevPage === 1 ? 2 : 1;
+    });
   };
 
   return (
@@ -34,7 +41,7 @@ export const Articles = () => {
       {articles.length > 0 && (
         <>
           <button onClick={clickHandler}>
-            {t("pages.page")} {page === 1 ? 2 : 1}
+            {t("pages.page")} {page}
           </button>
 
           <ul>

@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation, useParams } from "react-router-dom";
-import { setError, setPending } from "../redux/globalSlice";
+import { loadFromDB } from "../loadFromDB";
 import { getArticleById } from "../redux/operations";
 import { selectGlobal } from "../redux/selectors";
 
@@ -14,13 +14,14 @@ export const ArtDetails = () => {
   const dispatch = useDispatch();
   const { error } = useSelector(selectGlobal);
 
-  useEffect(() => {
-    dispatch(setPending(true));
-    getArticleById(articleId)
-      .then((res) => setArtContent(res.data))
-      .catch((err) => dispatch(setError(err.message)))
-      .finally(() => dispatch(setPending(false)));
-  }, [dispatch, articleId]);
+  const loader = useMemo(
+    () =>
+      loadFromDB(getArticleById, setArtContent, ["data"], dispatch, articleId),
+    [articleId, dispatch]
+  );
+
+  useEffect(() => loader(), [loader, articleId]);
+
   return (
     <div>
       <p>{error}</p>

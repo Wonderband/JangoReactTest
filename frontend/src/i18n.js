@@ -20,9 +20,9 @@ i18n
       en: {
         translation: {
           navigation: {
-            1: "Home",
-            2: "Articles",
-            3: "About Us",
+            game: "Home",
+            articles: "Articles",
+            about: "About Us",
           },
 
           articles: {
@@ -40,14 +40,17 @@ i18n
           page404: {
             title: "PAGE NOT FOUND!",
           },
+          article: {
+            back: "Back to search",
+          },
         },
       },
       ua: {
         translation: {
           navigation: {
-            1: "Головна",
-            2: "Статті",
-            3: "Про нас",
+            game: "Головна",
+            articles: "Статті",
+            about: "Про нас",
           },
           articles: {
             title: "Усі СТАТТІ тут!",
@@ -63,6 +66,9 @@ i18n
           },
           page404: {
             title: "ТАКОЇ СТОРІНКИ НЕМАЄ!",
+          },
+          article: {
+            back: "Назад до пошуку",
           },
         },
       },

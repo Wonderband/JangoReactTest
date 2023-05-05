@@ -1,28 +1,30 @@
 import { Link, Outlet } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { useDispatch } from "react-redux";
+import { setLanguage } from "../redux/globalSlice";
 
 const lngs = {
-  en: { nativeName: "English" },
-  ua: { nativeName: "Українська" },
+  en: { langName: "English" },
+  ua: { langName: "Українська" },
 };
 
-export const Home = ({ t }) => {
+export const Home = () => {
   const linkStyle = {
     paddingRight: "12px",
   };
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const dispatch = useDispatch();
   return (
     <>
       <header>
-        HEADER
         <nav>
           <Link style={linkStyle} to="/">
-            {t("navigation.1")}
+            {t("navigation.game")}
           </Link>
           <Link style={linkStyle} to="/articles">
-            {t("navigation.2")}
+            {t("navigation.articles")}
           </Link>
-          <Link to="/about"> {t("navigation.3")}</Link>
+          <Link to="/about"> {t("navigation.about")}</Link>
         </nav>
         <div>
           {Object.keys(lngs).map((lng) => (
@@ -32,9 +34,12 @@ export const Home = ({ t }) => {
                 fontWeight: i18n.resolvedLanguage === lng ? "bold" : "normal",
               }}
               type="submit"
-              onClick={() => i18n.changeLanguage(lng)}
+              onClick={() => {
+                i18n.changeLanguage(lng);
+                dispatch(setLanguage(lng));
+              }}
             >
-              {lngs[lng].nativeName}
+              {lngs[lng].langName}
             </button>
           ))}
         </div>

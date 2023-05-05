@@ -1,27 +1,25 @@
 import { useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
-import { getAboutInfo } from "../redux/operations";
+import { getMainInfo } from "../redux/operations";
 import { selectGlobal } from "../redux/selectors";
 import { loadFromDB } from "../loadFromDB";
-
-export const AboutUsTab = () => {
-  const [aboutInfo, setAboutInfo] = useState("");
+export const GameTab = () => {
+  const [mainInfo, setMainInfo] = useState("");
+  const { error, lang, pending } = useSelector(selectGlobal);
   const { t } = useTranslation();
-  const { lang, error, pending } = useSelector(selectGlobal);
   const dispatch = useDispatch();
   const loader = useMemo(
-    () => loadFromDB(getAboutInfo, setAboutInfo, ["statusText"], dispatch),
+    () => loadFromDB(getMainInfo, setMainInfo, ["statusText"], dispatch),
     [dispatch]
   );
   useEffect(() => loader(), [loader]);
-
   return (
     <div>
-      <p> {t("about.title")}</p>
+      <p>{t("rules.title")}</p>
       <p>{error}</p>
       {pending && <p>Loading data...</p>}
-      <p>Data from server: {aboutInfo}</p>
+      <p>Data from server: {mainInfo}</p>
       <p>Language: {lang}</p>
     </div>
   );

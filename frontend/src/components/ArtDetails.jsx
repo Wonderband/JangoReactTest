@@ -12,7 +12,7 @@ export const ArtDetails = () => {
   const location = useLocation();
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const { error } = useSelector(selectGlobal);
+  const { error, pending, lang } = useSelector(selectGlobal);
 
   const loader = useMemo(
     () =>
@@ -25,6 +25,8 @@ export const ArtDetails = () => {
   return (
     <div>
       <p>{error}</p>
+      {pending && <p>Loading data...</p>}
+      <p>Language: {lang}</p>
       <h1>{artContent.title}</h1>
       <h3>{artContent.author}</h3>
       <p>{artContent.content}</p>

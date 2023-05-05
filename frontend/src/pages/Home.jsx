@@ -4,8 +4,8 @@ import { useDispatch } from "react-redux";
 import { setLanguage } from "../redux/globalSlice";
 
 const lngs = {
-  en: { nativeName: "English" },
-  ua: { nativeName: "Українська" },
+  en: { langName: "English" },
+  ua: { langName: "Українська" },
 };
 
 export const Home = () => {
@@ -17,15 +17,14 @@ export const Home = () => {
   return (
     <>
       <header>
-        HEADER
         <nav>
           <Link style={linkStyle} to="/">
-            {t("navigation.1")}
+            {t("navigation.game")}
           </Link>
           <Link style={linkStyle} to="/articles">
-            {t("navigation.2")}
+            {t("navigation.articles")}
           </Link>
-          <Link to="/about"> {t("navigation.3")}</Link>
+          <Link to="/about"> {t("navigation.about")}</Link>
         </nav>
         <div>
           {Object.keys(lngs).map((lng) => (
@@ -40,7 +39,7 @@ export const Home = () => {
                 dispatch(setLanguage(lng));
               }}
             >
-              {lngs[lng].nativeName}
+              {lngs[lng].langName}
             </button>
           ))}
         </div>

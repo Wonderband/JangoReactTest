@@ -1,5 +1,4 @@
 import { Link, useLocation } from "react-router-dom";
-
 export const Article = ({ post }) => {
   const location = useLocation();
   return (

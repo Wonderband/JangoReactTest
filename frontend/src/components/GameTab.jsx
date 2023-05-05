@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getMainInfo } from "../redux/operations";
 import { selectGlobal } from "../redux/selectors";
 import { loadFromDB } from "../loadFromDB";
-export const RulesTab = () => {
+export const GameTab = () => {
   const [mainInfo, setMainInfo] = useState("");
   const { error, lang, pending } = useSelector(selectGlobal);
   const { t } = useTranslation();
@@ -16,13 +16,11 @@ export const RulesTab = () => {
   useEffect(() => loader(), [loader]);
   return (
     <div>
-      {t("rules.title")}
-      <br />
+      <p>{t("rules.title")}</p>
       <p>{error}</p>
-      <p>{pending}</p>
-      {mainInfo}
-      <br />
-      {lang}
+      {pending && <p>Loading data...</p>}
+      <p>Data from server: {mainInfo}</p>
+      <p>Language: {lang}</p>
     </div>
   );
 };

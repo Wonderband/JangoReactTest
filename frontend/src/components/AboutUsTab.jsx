@@ -18,11 +18,11 @@ export const AboutUsTab = () => {
 
   return (
     <div>
+      <p> {t("about.title")}</p>
       <p>{error}</p>
-      <p>{pending}</p>
-      <p>{lang}</p>
-      {t("about.title")}
-      <br /> {aboutInfo}
+      {pending && <p>Loading data...</p>}
+      <p>Data from server: {aboutInfo}</p>
+      <p>Language: {lang}</p>
     </div>
   );
 };

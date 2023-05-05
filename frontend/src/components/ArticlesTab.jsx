@@ -6,7 +6,7 @@ import { selectGlobal } from "../redux/selectors";
 import { loadFromDB } from "../loadFromDB";
 import { Article } from "./Article";
 
-export const Articles = () => {
+export const ArticlesTab = () => {
   const { t } = useTranslation();
   const { lang, error, pending } = useSelector(selectGlobal);
   const [articles, setArticles] = useState([]);
@@ -36,8 +36,8 @@ export const Articles = () => {
     <div>
       {t("articles.title")}
       <p>{error}</p>
-      <p>{pending}</p>
-      <p>{lang}</p>
+      {pending && <p>Loading data...</p>}
+      <p>Language: {lang}</p>
       {articles.length > 0 && (
         <>
           <button onClick={clickHandler}>

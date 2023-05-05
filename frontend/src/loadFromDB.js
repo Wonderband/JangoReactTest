@@ -7,7 +7,7 @@ export const loadFromDB = (
   dispatch,
   param = ""
 ) => {
-  const loader = () => {
+  const loadData = () => {
     dispatch(setPending(true));
     dispatch(setError(null));
     promiseFromDB(param)
@@ -19,5 +19,5 @@ export const loadFromDB = (
       .catch((err) => dispatch(setError(err.message)))
       .finally(() => dispatch(setPending(false)));
   };
-  return loader;
+  return loadData;
 };

@@ -19,7 +19,7 @@ export const GameTab = () => {
       <p>{t("rules.title")}</p>
       <p>{error}</p>
       {pending && <p>Loading data...</p>}
-      <p>Data from server: {mainInfo}</p>
+      <p>Data from server!!: {mainInfo}</p>
       <p>Language: {lang}</p>
     </div>
   );

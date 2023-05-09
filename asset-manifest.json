@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/JangoReactTest/static/css/main.e6c13ad2.css",
-    "main.js": "/JangoReactTest/static/js/main.76859a15.js",
+    "main.js": "/JangoReactTest/static/js/main.b93517ac.js",
     "static/js/787.b6734515.chunk.js": "/JangoReactTest/static/js/787.b6734515.chunk.js",
     "index.html": "/JangoReactTest/index.html",
     "main.e6c13ad2.css.map": "/JangoReactTest/static/css/main.e6c13ad2.css.map",
-    "main.76859a15.js.map": "/JangoReactTest/static/js/main.76859a15.js.map",
+    "main.b93517ac.js.map": "/JangoReactTest/static/js/main.b93517ac.js.map",
     "787.b6734515.chunk.js.map": "/JangoReactTest/static/js/787.b6734515.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.e6c13ad2.css",
-    "static/js/main.76859a15.js"
+    "static/js/main.b93517ac.js"
   ]
 }
